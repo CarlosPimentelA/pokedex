@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="img.png" href="./download.png">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <nav class="botones-tipos">
+                <button class="menos-pokes" id="ver-todos-poke">Ver todos</button>
+                <div class="boton-tipos2">
+                    <button type="button" id="menos-pokes" class="poke-cambio"><</button>
+                    <span class="poke-cambio" id="total-pags">1 de 156</span>
+                    <button type="button" id="mas-pokes" class="poke-cambio">></button>
+                </div>
+                <div class="boton-stats">
+                    <button type="button" id="mas-info" style="
+                    margin-left: 30%;
+                    border-radius: 99vmax;
+                    color: #fff;
+                    background-color: rgb(69, 69, 69);
+                    cursor: pointer;
+                    transition: .2s;">Estadisticas</button>
+                </div>
+            <div class="boton-tipos">
+                <div class="input-tipo">
+                    <input type="text" id="input-buscar-poke" placeholder="Buscar Pokemon">
+                    <button type="button" id="boton-buscar-poke">Buscar</button>
+                </div>
+            </div>
+        </nav>
+    </div>
+    </header>
+</body>
+<main>
+    <div id="pokemon">
+        <div class="pokemon-todos" id="listaPokemon">
+            <div class="pokemon-stadisticas">
+                <p class="stat" id="ps">Ps: </p>
+                <p class="stat" id="atk">Atk: </p>
+                <p class="stat" id="atk-esp">Atk.Esp: </p>
+                <p class="stat" id="def">Def: </p>
+                <p class="stat" id="def-esp">Def.Esp: </p>
+                <p class="stat" id="speed">Speed: </p>
+            </div>
+            <!-- <div class="pokemon">
+                <div class="pokemon-img">
+                    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pikachu">
+                </div>
+                <div class="pokemon-info">
+                    <div class="nombre-contenedor">
+                        <p class="pokemon-id">#025</p>
+                        <h2 class="pokemon-nombre">Pikachu</h2>
+                    </div>
+                    <div class="pokemon-tipos">
+                        <p>ELECTRICO</p>
+                        <p>LUCHA</p>
+                    </div>
+                    <div class="pokemon-stats">
+                        <p class="stat">4m</p>
+                        <p class="stat">60Kg</p>
+
+                        
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div> 
+    <script src="app.js"></script>
+</main>
+</html>
