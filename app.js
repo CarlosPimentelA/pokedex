@@ -248,7 +248,7 @@ botonRetroceder.addEventListener('click', retrocederPag)
                 <h2>${statPoke.name.toUpperCase()}</h2>
                 <img src="${imgPoke}" alt="${statPoke.name.toUpperCase()}">
                 <p class="stat" id="ps">Ps: ${pokePs}</p>
-                <p class="stat" id="atk">Atq: ${pokeAtk}</p>
+                <p class="stat" id="atk">Atk: ${pokeAtk}</p>
                 <p class="stat" id="atk-esp">Atk. Esp: ${pokeAtkEsp}</p>
                 <p class="stat" id="def">Def: ${pokeDef}</p>
                 <p class="stat" id="def-esp">Def. Esp: ${pokeDefEsp}</p>
