@@ -31,17 +31,6 @@ header .botones-tipos {
     justify-content: center;
 }
 
-.boton-tipos img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-}
-
-.item-list {
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
 main {
     display: flex;
     flex-wrap: wrap;

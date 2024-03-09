@@ -45,7 +45,10 @@ function verificarBotones() {
 }
 
 async function botonBusc() {
+    botonStats.textContent = 'Estadisticas'
+    verTodosButton.textContent = 'Ver Todo'
     const valueInput = inputBuscar.value 
+    
     datosPokeBusc = []
 
     for(let i = 1 ; i <= 400; i++) {
@@ -114,7 +117,7 @@ async function botonBusc() {
                     <p class="stat">${weight / 10}Kg</p>
                     
                     <div class="pokemon-stats"> 
-                    <button type="button" id="mas-info" style="
+                    <button type="button" id="mas-info-busc" style="
                     margin-left: 30%;
                     border-radius: 99vmax;
                     color: #fff;
@@ -259,5 +262,14 @@ botonRetroceder.addEventListener('click', retrocederPag)
     })
 }
 
+function statsBusc() {
+    
+}
+
+divMain.addEventListener('click', (e) => {
+    if (e.target.id == 'mas-info-busc') {
+        
+    }
+})
 
 renderizar() 
