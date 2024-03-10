@@ -46,9 +46,9 @@ function verificarBotones() {
 
 async function botonBusc() {
     botonStats.textContent = 'Estadisticas'
-    verTodosButton.textContent = 'Ver Todo'
+    verTodosButton.textContent = 'Volver'
     const valueInput = inputBuscar.value 
-    
+
     datosPokeBusc = []
 
     for(let i = 1 ; i <= 400; i++) {
@@ -62,12 +62,20 @@ async function botonBusc() {
 
          const divPoke = document.createElement("div");
          divPoke.classList.add("pokemon");
-            const { name, height, types, weight, sprites: { front_default }, id} = pokemon;
+         const divStatPoke = document.createElement('div')
+         divStatPoke.classList.add('pokemon-stadisticas')
+            const { name, height, types, weight, sprites: { front_default }, id, stats} = pokemon;
 
             const pokeType = types[0];
             const pokeType2 = types[1];
+            const ps = stats[0].base_stat;
+            const atk = stats[1].base_stat;
+            const atkEsp = stats[2].base_stat;
+            const def = stats[3].base_stat;
+            const defEsp = stats[4].base_stat;
+            const speed = stats[5].base_stat;
 
-
+            
         if (pokeType && !pokeType2) {
             divPoke.innerHTML = ` 
             <div class="pokemon-img">
@@ -82,17 +90,16 @@ async function botonBusc() {
                     <p>${types[0].type.name.toUpperCase()}</p>
                 </div>
                 <div class="pokemon-stats">
-                <p class="stat">${height}m</p>
-                <p class="stat">${weight / 10}Kg</p>
-                
+                <p class="stat" id="height">${height}m</p>
+                <p class="stat" id="weight">${weight / 10}Kg</p>
+                <p class="stat" id="ps" >Ps: ${ps}</p>
+                <p class="stat" id="atk" hidden>Atk: ${atk}</p>
+                <p class="stat" id="atk-esp" hidden>Atk.Esp: ${atkEsp}</p>
+                <p class="stat" id="def" hidden>Def: ${def}</p>
+                <p class="stat" id="def-esp" hidden>Def.Esp: ${defEsp}</p>
+                <p class="stat" id="speed" hidden>Speed: ${speed}</p>
                 <div class="pokemon-stats"> 
-                <button type="button" id="mas-info" style="
-                margin-left: 30%;
-                        border-radius: 99vmax;
-                        color: #fff;
-                        background-color: rgb(69, 69, 69);
-                        cursor: pointer;
-                        transition: .2s;">Mas info</button>
+
                         </div>
                 </div>
         </div>`
@@ -113,17 +120,16 @@ async function botonBusc() {
                     <p>${types[1].type.name.toUpperCase()}</p>
                     </div>
                     <div class="pokemon-stats">
-                    <p class="stat">${height}m</p>
-                    <p class="stat">${weight / 10}Kg</p>
-                    
+                    <p class="stat" id="height">${height}m</p>
+                    <p class="stat" id="weight">${weight / 10}Kg</p>
+                    <p class="stat" id="ps" hidden>Ps: ${ps}</p>
+                    <p class="stat" id="atk" hidden>Atk: ${atk}</p>
+                    <p class="stat" id="atk-esp" hidden>Atk.Esp: ${atkEsp}</p>
+                    <p class="stat" id="def" hidden>Def: ${def}</p>
+                    <p class="stat" id="def-esp" hidden>Def.Esp: ${defEsp}</p>
+                    <p class="stat" id="speed" hidden>Speed: ${speed}</p>
                     <div class="pokemon-stats"> 
-                    <button type="button" id="mas-info-busc" style="
-                    margin-left: 30%;
-                    border-radius: 99vmax;
-                    color: #fff;
-                    background-color: rgb(69, 69, 69);
-                    cursor: pointer;
-                    transition: .2s;">Mas info</button>
+                    
                     </div>
                     </div>
                         </div>`
@@ -165,11 +171,16 @@ botonRetroceder.addEventListener('click', retrocederPag)
         datosDataFetch.forEach( function (pokemon) {
             const divPoke = document.createElement("div");
          divPoke.classList.add("pokemon");
-            const { name, height, types, weight, sprites: { front_default }, id} = pokemon;
+            const { name, height, types, weight, sprites: { front_default }, id, stats} = pokemon;
 
             const pokeType = types[0];
             const pokeType2 = types[1];
-
+            const ps = stats[0].base_stat;
+            const atk = stats[1].base_stat;
+            const atkEsp = stats[2].base_stat;
+            const def = stats[3].base_stat;
+            const defEsp = stats[4].base_stat;
+            const speed = stats[5].base_stat;
 
         if (pokeType && !pokeType2) {
             divPoke.innerHTML = ` 
@@ -185,10 +196,16 @@ botonRetroceder.addEventListener('click', retrocederPag)
                     <p>${types[0].type.name.toUpperCase()}</p>
                 </div>
                 <div class="pokemon-stats">
-                <p class="stat">${height}m</p>
-                <p class="stat">${weight / 10}Kg</p>
-                </div>
-        </div>`
+                <p class="stat" id="height">${height}m</p>
+                <p class="stat" id="weight">${weight / 10}Kg</p>
+                <p class="stat" id="ps" hidden>Ps: ${ps}</p>
+                <p class="stat" id="atk" hidden>Atk: ${atk}</p>
+                <p class="stat" id="atk-esp" hidden>Atk.Esp: ${atkEsp}</p>
+                <p class="stat" id="def" hidden>Def: ${def}</p>
+                <p class="stat" id="def-esp" hidden>Def.Esp: ${defEsp}</p>
+                <p class="stat" id="speed" hidden>Speed: ${speed}</p>
+        </div>
+    </div>`
         divListaPoke.appendChild(divPoke);
     } else if (pokeType && pokeType2) {
             divPoke.innerHTML = ` 
@@ -205,9 +222,18 @@ botonRetroceder.addEventListener('click', retrocederPag)
                     <p>${types[1].type.name.toUpperCase()}</p>
                     </div>
                     <div class="pokemon-stats">
-                    <p class="stat">${height}m</p>
-                    <p class="stat">${weight / 10}Kg</p>
-                    </div>
+                    <p class="stat" id="height">${height}m</p>
+                    <p class="stat" id="weight">${weight / 10}Kg</p>
+                    <p class="stat" hidden></p>
+                    <p class="stat" id="ps" hidden>Ps: ${ps}</p>
+                    <p class="stat" id="atk" hidden>Atk: ${atk}</p>
+                    <p class="stat" id="atk-esp" hidden>Atk.Esp: ${atkEsp}</p>
+                    <p class="stat" id="def" hidden>Def: ${def}</p>
+                    <p class="stat" id="def-esp" hidden>Def.Esp: ${defEsp}</p>
+                    <p class="stat" id="speed" hidden>Speed: ${speed}</p>
+
+        </div>
+                            </div>
                     </div>`
                         
                         divListaPoke.appendChild(divPoke);
@@ -227,7 +253,7 @@ botonRetroceder.addEventListener('click', retrocederPag)
 
     botonStats.addEventListener('click', () => {
         verTodosButton.textContent = 'Volver'
-        mostrarEstadisticasPokemon()
+        statsPokeCard()
     })
 
     
@@ -262,14 +288,41 @@ botonRetroceder.addEventListener('click', retrocederPag)
     })
 }
 
-function statsBusc() {
-    
-}
-
-divMain.addEventListener('click', (e) => {
-    if (e.target.id == 'mas-info-busc') {
-        
-    }
+function statsPokeCard() {
+   const ps = document.querySelectorAll('#ps');
+   ps.forEach((p) => {
+    p.removeAttribute('hidden')
+   })
+   const atk = document.querySelectorAll('#atk');
+   atk.forEach((p) =>{
+       p.removeAttribute('hidden')
+   })
+   const atkEsp = document.querySelectorAll('#atk-esp');
+   atkEsp.forEach((p) =>{
+    p.removeAttribute('hidden')
+})
+   const def = document.querySelectorAll('#def');
+   def.forEach((p) =>{
+    p.removeAttribute('hidden')
+})
+   const defEsp = document.querySelectorAll('#def-esp');
+   defEsp.forEach((p) =>{
+    p.removeAttribute('hidden')
+})
+   const speed = document.querySelectorAll('#speed');
+   speed.forEach((p) =>{
+    p.removeAttribute('hidden')
 })
 
+const weight = document.querySelectorAll('#weight')
+weight.forEach((p) => {
+    p.remove()
+})
+
+const height = document.querySelectorAll('#height')
+height.forEach((p) => {
+    p.remove()
+})
+}    
+//Implementar la funcion de stats individualmente en la funcion de buscar poke
 renderizar() 
