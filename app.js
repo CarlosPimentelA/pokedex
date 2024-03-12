@@ -1,6 +1,6 @@
 
 const divMain = document.getElementById('pokemon');
-const divListaPoke = document.getElementById('listaPokemon');
+const divListaPoke = document.getElementById('todos-pokemon');
 const botonAvanzar = document.getElementById('mas-pokes');
 const botonRetroceder = document.getElementById('menos-pokes');
 const inputBuscar = document.getElementById('input-buscar-poke');
@@ -9,7 +9,7 @@ const totalPagsPan = document.getElementById('total-pags');
 const totalPokesPag = 12;
 let paginaActual = 1;
 const url = "https://pokeapi.co/api/v2/pokemon/";
-let datosAPI = []
+let datosAPI = [];
 let datosPokeBusc = [];
 const verTodosButton = document.getElementById('ver-todos-poke')
 const divPoke = document.createElement("div");
@@ -30,7 +30,7 @@ async function dataFetch() {
         return datosAPI.slice(offset, limit)
     }
 
-    
+   
     function totalPags() {
     const total = Math.ceil(1025 / totalPokesPag);
     return total;
@@ -56,6 +56,7 @@ async function botonBusc() {
         const response = await request.json();
         datosPokeBusc.push(response)
     }
+
   datosPokeBusc.find((pokemon) => {
     if(valueInput == pokemon.name || valueInput == pokemon.id) {
         divListaPoke.innerHTML = ``;
@@ -91,8 +92,8 @@ async function botonBusc() {
                 </div>
                 <div class="pokemon-stats">
                 <p class="stat" id="height">${height}m</p>
-                <p class="stat" id="weight">${weight / 10}Kg</p>
-                <p class="stat" id="ps" >Ps: ${ps}</p>
+                <p class="stat" id="weight">${weight}Kg</p>
+                <p class="stat" id="ps" hidden>Ps: ${ps}</p>
                 <p class="stat" id="atk" hidden>Atk: ${atk}</p>
                 <p class="stat" id="atk-esp" hidden>Atk.Esp: ${atkEsp}</p>
                 <p class="stat" id="def" hidden>Def: ${def}</p>
@@ -121,7 +122,7 @@ async function botonBusc() {
                     </div>
                     <div class="pokemon-stats">
                     <p class="stat" id="height">${height}m</p>
-                    <p class="stat" id="weight">${weight / 10}Kg</p>
+                    <p class="stat" id="weight">${weight}Kg</p>
                     <p class="stat" id="ps" hidden>Ps: ${ps}</p>
                     <p class="stat" id="atk" hidden>Atk: ${atk}</p>
                     <p class="stat" id="atk-esp" hidden>Atk.Esp: ${atkEsp}</p>
@@ -140,9 +141,7 @@ async function botonBusc() {
   })
 }
             
-botonBuscar.addEventListener('click', () => {
-    botonBusc();
-})
+botonBuscar.addEventListener('click', botonBusc)
             
             
 function avanzarPag() {
@@ -197,7 +196,7 @@ botonRetroceder.addEventListener('click', retrocederPag)
                 </div>
                 <div class="pokemon-stats">
                 <p class="stat" id="height">${height}m</p>
-                <p class="stat" id="weight">${weight / 10}Kg</p>
+                <p class="stat" id="weight">${weight}Kg</p>
                 <p class="stat" id="ps" hidden>Ps: ${ps}</p>
                 <p class="stat" id="atk" hidden>Atk: ${atk}</p>
                 <p class="stat" id="atk-esp" hidden>Atk.Esp: ${atkEsp}</p>
@@ -223,7 +222,7 @@ botonRetroceder.addEventListener('click', retrocederPag)
                     </div>
                     <div class="pokemon-stats">
                     <p class="stat" id="height">${height}m</p>
-                    <p class="stat" id="weight">${weight / 10}Kg</p>
+                    <p class="stat" id="weight">${weight}Kg</p>
                     <p class="stat" hidden></p>
                     <p class="stat" id="ps" hidden>Ps: ${ps}</p>
                     <p class="stat" id="atk" hidden>Atk: ${atk}</p>
@@ -242,10 +241,6 @@ botonRetroceder.addEventListener('click', retrocederPag)
         });
     }
 
-    function pag1() {
-        paginaActual = 1;
-    }
-
     verTodosButton.addEventListener('click', () => {
         verTodosButton.textContent = "Ver todos"
         renderizar(paginaActual)
@@ -255,38 +250,6 @@ botonRetroceder.addEventListener('click', retrocederPag)
         verTodosButton.textContent = 'Volver'
         statsPokeCard()
     })
-
-    
-
-   async function mostrarEstadisticasPokemon() {
-    divListaPoke.innerHTML = ``;
-    const datosF = await dataFetch();
-    datosF.forEach((statPoke) => {
-        const divPokeStat = document.createElement('div');
-        divPokeStat.classList.add('pokemon-stadisticas');
-        const pokePs = statPoke.stats[0].base_stat;
-        const pokeAtk = statPoke.stats[1].base_stat;
-        const pokeAtkEsp = statPoke.stats[2].base_stat;
-        const pokeDef = statPoke.stats[3].base_stat;
-        const pokeDefEsp = statPoke.stats[4].base_stat;
-        const pokeSpd = statPoke.stats[5].base_stat;
-        const imgPoke = statPoke.sprites.front_default;
-        divPokeStat.innerHTML =
-            `
-            <div class="pokemon-stadisticas">
-                <h2>${statPoke.name.toUpperCase()}</h2>
-                <img src="${imgPoke}" alt="${statPoke.name.toUpperCase()}">
-                <p class="stat" id="ps">Ps: ${pokePs}</p>
-                <p class="stat" id="atk">Atk: ${pokeAtk}</p>
-                <p class="stat" id="atk-esp">Atk. Esp: ${pokeAtkEsp}</p>
-                <p class="stat" id="def">Def: ${pokeDef}</p>
-                <p class="stat" id="def-esp">Def. Esp: ${pokeDefEsp}</p>
-                <p class="stat" id="speed">Velocidad: ${pokeSpd}</p>
-            </div>
-           `;
-        divListaPoke.appendChild(divPokeStat);
-    })
-}
 
 function statsPokeCard() {
    const ps = document.querySelectorAll('#ps');
@@ -324,5 +287,5 @@ height.forEach((p) => {
     p.remove()
 })
 }    
-//Implementar la funcion de stats individualmente en la funcion de buscar poke
+
 renderizar() 
