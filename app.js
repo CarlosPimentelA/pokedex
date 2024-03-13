@@ -48,77 +48,44 @@ async function botonBusc() {
     botonStats.textContent = 'Estadisticas'
     verTodosButton.textContent = 'Volver'
     const valueInput = inputBuscar.value 
-
     datosPokeBusc = []
-
-    for(let i = 1 ; i <= 400; i++) {
-        const request = await fetch(`${url}${i}`)
+        const request = await fetch(`${url}${inputBuscar.value}`)
         const response = await request.json();
-        datosPokeBusc.push(response)
-    }
 
-  datosPokeBusc.find((pokemon) => {
-    if(valueInput == pokemon.name || valueInput == pokemon.id) {
-        divListaPoke.innerHTML = ``;
+       datosPokeBusc.push(response)
 
-         const divPoke = document.createElement("div");
-         divPoke.classList.add("pokemon");
-         const divStatPoke = document.createElement('div')
-         divStatPoke.classList.add('pokemon-stadisticas')
-            const { name, height, types, weight, sprites: { front_default }, id, stats} = pokemon;
-
-            const pokeType = types[0];
-            const pokeType2 = types[1];
-            const ps = stats[0].base_stat;
-            const atk = stats[1].base_stat;
-            const atkEsp = stats[2].base_stat;
-            const def = stats[3].base_stat;
-            const defEsp = stats[4].base_stat;
-            const speed = stats[5].base_stat;
-
-            
-        if (pokeType && !pokeType2) {
-            divPoke.innerHTML = ` 
-            <div class="pokemon-img">
-            <img src="${front_default}">
-            </div>
-            <div class="pokemon-info">
-                <div class="nombre-contenedor">
-                    <p class="pokemon-id">#${id}</p>
-                    <h2 class="pokemon-nombre">${name.toUpperCase()}</h2>
-                    </div>
-                    <div class="pokemon-tipos">
-                    <p>${types[0].type.name.toUpperCase()}</p>
+       datosPokeBusc.forEach((pokemon) => {
+        if(valueInput == pokemon.name || valueInput == pokemon.id) {
+            divListaPoke.innerHTML = ``;
+    
+             const divPoke = document.createElement("div");
+             divPoke.classList.add("pokemon");
+             const divStatPoke = document.createElement('div')
+             divStatPoke.classList.add('pokemon-stadisticas')
+                const { name, height, types, weight, sprites: { front_default }, id, stats} = pokemon;
+    
+                const pokeType = types[0];
+                const pokeType2 = types[1];
+                const ps = stats[0].base_stat;
+                const atk = stats[1].base_stat;
+                const atkEsp = stats[2].base_stat;
+                const def = stats[3].base_stat;
+                const defEsp = stats[4].base_stat;
+                const speed = stats[5].base_stat;
+    
+                
+            if (pokeType && !pokeType2) {
+                divPoke.innerHTML = ` 
+                <div class="pokemon-img">
+                <img src="${front_default}">
                 </div>
-                <div class="pokemon-stats">
-                <p class="stat" id="height">${height}m</p>
-                <p class="stat" id="weight">${weight}Kg</p>
-                <p class="stat" id="ps" hidden>Ps: ${ps}</p>
-                <p class="stat" id="atk" hidden>Atk: ${atk}</p>
-                <p class="stat" id="atk-esp" hidden>Atk.Esp: ${atkEsp}</p>
-                <p class="stat" id="def" hidden>Def: ${def}</p>
-                <p class="stat" id="def-esp" hidden>Def.Esp: ${defEsp}</p>
-                <p class="stat" id="speed" hidden>Speed: ${speed}</p>
-                <div class="pokemon-stats"> 
-
+                <div class="pokemon-info">
+                    <div class="nombre-contenedor">
+                        <p class="pokemon-id">#${id}</p>
+                        <h2 class="pokemon-nombre">${name.toUpperCase()}</h2>
                         </div>
-                </div>
-        </div>`
-        divListaPoke.appendChild(divPoke);
-    } 
-    else if (pokeType && pokeType2) {
-            divPoke.innerHTML = ` 
-            <div class="pokemon-img">
-            <img src="${front_default}">
-            </div>
-            <div class="pokemon-info">
-                <div class="nombre-contenedor">
-                    <p class="pokemon-id">#${id}</p>
-                    <h2 class="pokemon-nombre">${name.toUpperCase()}</h2>
-                    </div>
-                    <div class="pokemon-tipos">
-                    <p>${types[0].type.name.toUpperCase()}</p>
-                    <p>${types[1].type.name.toUpperCase()}</p>
+                        <div class="pokemon-tipos">
+                        <p>${types[0].type.name.toUpperCase()}</p>
                     </div>
                     <div class="pokemon-stats">
                     <p class="stat" id="height">${height}m</p>
@@ -130,15 +97,45 @@ async function botonBusc() {
                     <p class="stat" id="def-esp" hidden>Def.Esp: ${defEsp}</p>
                     <p class="stat" id="speed" hidden>Speed: ${speed}</p>
                     <div class="pokemon-stats"> 
-                    
+    
+                            </div>
                     </div>
-                    </div>
-                        </div>`
+            </div>`
+            divListaPoke.appendChild(divPoke);
+        } 
+        else if (pokeType && pokeType2) {
+                divPoke.innerHTML = ` 
+                <div class="pokemon-img">
+                <img src="${front_default}">
+                </div>
+                <div class="pokemon-info">
+                    <div class="nombre-contenedor">
+                        <p class="pokemon-id">#${id}</p>
+                        <h2 class="pokemon-nombre">${name.toUpperCase()}</h2>
+                        </div>
+                        <div class="pokemon-tipos">
+                        <p>${types[0].type.name.toUpperCase()}</p>
+                        <p>${types[1].type.name.toUpperCase()}</p>
+                        </div>
+                        <div class="pokemon-stats">
+                        <p class="stat" id="height">${height}m</p>
+                        <p class="stat" id="weight">${weight}Kg</p>
+                        <p class="stat" id="ps" hidden>Ps: ${ps}</p>
+                        <p class="stat" id="atk" hidden>Atk: ${atk}</p>
+                        <p class="stat" id="atk-esp" hidden>Atk.Esp: ${atkEsp}</p>
+                        <p class="stat" id="def" hidden>Def: ${def}</p>
+                        <p class="stat" id="def-esp" hidden>Def.Esp: ${defEsp}</p>
+                        <p class="stat" id="speed" hidden>Speed: ${speed}</p>
+                        <div class="pokemon-stats"> 
                         
-                        divListaPoke.appendChild(divPoke);
-                    }
-    } 
-  })
+                        </div>
+                        </div>
+                            </div>`
+                            
+                            divListaPoke.appendChild(divPoke);
+                        }
+        }
+       })
 }
             
 botonBuscar.addEventListener('click', botonBusc)
